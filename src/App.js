@@ -1,12 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
-import {
-	BrowserRouter as Router,
-	Route,
-	Switch,
-	Redirect,
-} from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import CartPage from './pages/cart/CartPage';
 import LoginPage from './pages/authorization/login/LoginPage';
 import RegisterPage from './pages/authorization/register/RegisterPage';
@@ -22,7 +17,9 @@ import {
 } from '@material-ui/core';
 import ProtectedRoute from './components/ProtectedRoute';
 import { auth } from './auth';
+import { createBrowserHistory } from 'history';
 
+const history = createBrowserHistory();
 const styles = (theme) =>
 	createStyles({
 		root: {
@@ -58,7 +55,7 @@ class App extends React.Component {
 				<div>Loading...</div>
 			</div>
 		) : (
-			<Router>
+			<Router history={history}>
 				<div className={`App ${classes.root}`}>
 					<Navbar />
 					<Container className='container'>

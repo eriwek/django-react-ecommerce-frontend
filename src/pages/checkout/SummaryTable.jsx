@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { Cash } from '../../config';
+import { getCurrencyFormat } from '../../config';
 
 const TAX_RATE = 0.07;
 
@@ -16,10 +16,6 @@ const styles = makeStyles({
 		minWidth: 700,
 	},
 });
-
-function ccyFormat(num) {
-	return `${Cash.symbol}${num.toFixed(2)}`;
-}
 
 class SummaryTable extends React.Component {
 	constructor(props) {
@@ -68,30 +64,36 @@ class SummaryTable extends React.Component {
 							<TableRow key={product.id}>
 								<TableCell>{product.title}</TableCell>
 								<TableCell align='right'>{product.qty}</TableCell>
-								<TableCell align='right'>{ccyFormat(product.unit)}</TableCell>
-								<TableCell align='right'>{ccyFormat(product.total)}</TableCell>
+								<TableCell align='right'>
+									{getCurrencyFormat(product.unit)}
+								</TableCell>
+								<TableCell align='right'>
+									{getCurrencyFormat(product.total)}
+								</TableCell>
 							</TableRow>
 						))}
 
 						<TableRow>
 							<TableCell rowSpan={4} />
 							<TableCell colSpan={2}>Subtotal</TableCell>
-							<TableCell align='right'>{ccyFormat(subTotal)}</TableCell>
+							<TableCell align='right'>{getCurrencyFormat(subTotal)}</TableCell>
 						</TableRow>
 						<TableRow>
 							<TableCell>Tax</TableCell>
 							<TableCell align='right'>{`${(TAX_RATE * 100).toFixed(
 								0
 							)} %`}</TableCell>
-							<TableCell align='right'>{ccyFormat(tax)}</TableCell>
+							<TableCell align='right'>{getCurrencyFormat(tax)}</TableCell>
 						</TableRow>
 						<TableRow>
 							<TableCell colSpan={2}>Shipping Cost</TableCell>
-							<TableCell align='right'>{ccyFormat(shippingCost)}</TableCell>
+							<TableCell align='right'>
+								{getCurrencyFormat(shippingCost)}
+							</TableCell>
 						</TableRow>
 						<TableRow>
 							<TableCell colSpan={2}>Total</TableCell>
-							<TableCell align='right'>{ccyFormat(total)}</TableCell>
+							<TableCell align='right'>{getCurrencyFormat(total)}</TableCell>
 						</TableRow>
 					</TableBody>
 				</Table>

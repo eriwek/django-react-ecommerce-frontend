@@ -2,8 +2,6 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade, withStyles, createStyles } from '@material-ui/core/styles';
 import { Menu, MenuItem, Badge, Button } from '@material-ui/core';
 import {
@@ -12,10 +10,11 @@ import {
 	ShoppingBasket as CartIcon,
 	Notifications as NotificationsIcon,
 	Mail as MailIcon,
-	Search as SearchIcon,
 } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { auth } from '../auth';
+import logo from '../dark-icon.png';
+import SearchForm from './SearchForm';
 
 const styles = (theme) =>
 	createStyles({
@@ -200,29 +199,11 @@ class Navbar extends React.Component {
 			<div className={classes.grow}>
 				<AppBar color='primary' position='fixed'>
 					<Toolbar>
-						<Typography
-							className={classes.title}
-							variant='h6'
-							noWrap
-							component={Link}
-							to='/'
-							color='inherit'
-						>
-							Material-UI
-						</Typography>
-						<div className={classes.search}>
-							<div className={classes.searchIcon}>
-								<SearchIcon />
-							</div>
-							<InputBase
-								placeholder='Search…'
-								classes={{
-									root: classes.inputRoot,
-									input: classes.inputInput,
-								}}
-								inputProps={{ 'aria-label': 'search' }}
-							/>
-						</div>
+						<Link to='/' className={classes.title}>
+							<img src={logo} style={{ height: '60px' }} alt='' />
+						</Link>
+						<SearchForm />
+
 						<div className={classes.grow} />
 						<div className={classes.sectionDesktop}>
 							<Button
